@@ -1,4 +1,4 @@
-from urllib.parse import urlencode, quote
+from urllib.parse import urlencode
 
 
 def validate_params(params, required=None):
@@ -26,8 +26,6 @@ def prepare_params(params, required=None):
     else:
         validate_params(params, required)
 
-    query = urlencode(
-        '&'.join([f'{key}={value}' for key, value in params.items()])
-    )
+    query = urlencode(params)
 
     return f'?{query}'
