@@ -22,18 +22,18 @@ def _search(criteria, auth, search_type):
     return json.loads(response.text)
 
 
-def _search_artist(criteria, auth):
+def search_artist(criteria, auth):
     return _search(criteria, auth, SearchType.ARTIST)
 
 
-def _search_album(criteria, auth):
+def search_album(criteria, auth):
     return _search(criteria, auth, SearchType.ALBUM)
 
 
-def _search_playlist(criteria, auth):
+def search_playlist(criteria, auth):
     return _search(criteria, auth, SearchType.PLAYLIST)
 
 
-def _search_track(criteria, auth):
+def search_track(criteria, auth):
     return _search(criteria, auth, SearchType.TRACK)
 
