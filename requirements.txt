@@ -1,0 +1,3 @@
+requests==2.18.4
+pyYAML==3.12
+pyYAML==3.12
