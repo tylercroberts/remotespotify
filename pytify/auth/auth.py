@@ -6,6 +6,7 @@ from .authorization import Authorization
 from .auth_method import AuthMethod
 from pytify.core import BadRequestError
 
+
 def get_auth_key(client_id, client_secret):
     byte_keys = bytes(f'{client_id}:{client_secret}', 'utf-8')
     encoded_key = base64.b64encode(byte_keys)
@@ -24,7 +25,6 @@ def _authorization_code(conf):
 
             if refresh_token:
                 return _refresh_access_token(auth_key, refresh_token)
-
 
     except IOError:
         raise IOError("It seems you have not yet authorized the application. The file .pytify was not found")
@@ -73,7 +73,7 @@ def _refresh_access_token(auth_key, refresh_token):
     headers = {"Authorization": "Basic {}".format(auth_key), }
 
     options = {
-        "refresh_token": "refresh_token",
+        "refresh_token": refresh_token,
         "grant_type": "refresh_token"
     }
 
