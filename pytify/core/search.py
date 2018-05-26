@@ -1,12 +1,14 @@
 import requests
 import json
-from urllib.parse import urlencode
+from urllib.parse import quote
 
 from .search_type import SearchType
-from pytify.core import read_config
+from pytify.core import read_config, logging_wrapper
 
 
 def _search(criteria, auth, search_type):
+    logger = logging_wrapper(2, "logs/test.log")
+    logger.info("Criteria is: {}".format(criteria))
 
     config = read_config()
 
@@ -14,10 +16,14 @@ def _search(criteria, auth, search_type):
         raise AttributeError("Parameter `criteria` is required")
 
     q_type = search_type.name.lower()
-    url = urlencode(f'{config.base_url}/search?q={criteria}&type={q_type}')
+    url = quote(f'{config.base_url}/search?q={criteria}&type={q_type}', safe="/:?&=")
+    logger.info("URL to request: {}".format(url))
 
-    headers = {"Authorization": 'Bearer {auth.access_token'}
+    headers = {"Authorization": f'Bearer {auth.access_token}'}
     response = requests.get(url, headers=headers)
+
+    # if response['error']:
+    #     #     logger.warning("{}".format(response['Error']))
 
     return json.loads(response.text)
 

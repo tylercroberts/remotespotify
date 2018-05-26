@@ -1,4 +1,4 @@
-from urllib.parse import urlencode
+from urllib.parse import urlencode, quote
 
 
 def validate_params(params, required=None):
